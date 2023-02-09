@@ -1,7 +1,7 @@
 "use strict";
 /** @format */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findUserById = exports.signUp = void 0;
+exports.findAllUsers = exports.findUserById = exports.signUp = void 0;
 const db = require('../config/db.config');
 function signUp(req, res, next) {
     console.log('inside signup controller');
@@ -44,3 +44,19 @@ function findUserById(req, res, next) {
     }
 }
 exports.findUserById = findUserById;
+function findAllUsers(req, res, next) {
+    console.log('inside findAllUsers controller');
+    try {
+        const queryText = 'SELECT * FROM users';
+        db.query(queryText, (err, result) => {
+            if (err) {
+                return next(err);
+            }
+            res.send(result.rows);
+        });
+    }
+    catch (e) {
+        e;
+    }
+}
+exports.findAllUsers = findAllUsers;

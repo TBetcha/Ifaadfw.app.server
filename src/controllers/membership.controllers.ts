@@ -45,3 +45,19 @@ export function findUserById(req: Request, res: Response, next: NextFunction) {
     e
   }
 }
+
+export function findAllUsers(req: Request, res: Response, next: NextFunction) {
+  console.log('inside findAllUsers controller')
+  try {
+    const queryText = 'SELECT * FROM users'
+
+    db.query(queryText, (err: any, result: { rows: any[] }) => {
+      if (err) {
+        return next(err)
+      }
+      res.send(result.rows)
+    })
+  } catch (e) {
+    e
+  }
+}
