@@ -2,7 +2,7 @@
 
 import express from 'express'
 import requestLogger from '../middleware/logger.middleware'
-import { signUp } from '../controllers/membership.controllers'
+import { findUserById, signUp } from '../controllers/membership.controllers'
 
 const router = express.Router()
 
@@ -12,6 +12,7 @@ router.get('/membership-form', (req, res, next) => {
   res.send('<h1>Downloading mmebership form<h1>')
 })
 
-router.post('/membership', [requestLogger], signUp)
+router.post('/member', [requestLogger], signUp)
+router.get('/member/:userId', [requestLogger], findUserById)
 
 export default router
