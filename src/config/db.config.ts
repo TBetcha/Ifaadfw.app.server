@@ -11,6 +11,7 @@ module.exports = {
       password: process.env.DB_PASSWORD,
       port: 5432,
     })
+    console.log('connected to db')
     return pool.query(text, params, callback)
   },
 
