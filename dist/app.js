@@ -30,15 +30,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const logger_middleware_1 = __importDefault(require("./middleware/logger.middleware"));
 const membership_routes_1 = __importDefault(require("./routes/membership.routes"));
+const auth_config_1 = require("./config/auth.config");
 const dotenv = __importStar(require("dotenv"));
+const express_openid_connect_1 = require("express-openid-connect");
 dotenv.config({ debug: true });
 const app = (0, express_1.default)();
 //body parser
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(express_1.default.json());
+app.use((0, express_openid_connect_1.auth)(auth_config_1.config));
 app.use(membership_routes_1.default);
 app.use(logger_middleware_1.default);
 app.use('/', (req, res) => {
+    res.send(req.oidc.isAuthenticated() ? 'Logged' : 'Not Authenticated');
     res.send('<h1>hello bruh<h1>');
 });
 const PORT = process.env.PORT || 3001;
