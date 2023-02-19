@@ -2,11 +2,12 @@
 
 import express from 'express'
 import { Express } from 'express-serve-static-core'
+import { auth } from 'express-openid-connect'
+import * as dotenv from 'dotenv'
 import loggerMiddleware from './middleware/logger.middleware'
 import membershipRoutes from './routes/membership.routes'
+import authRoutes from './routes/auth.routes'
 import config from './config/auth.config'
-import * as dotenv from 'dotenv'
-import { auth } from 'express-openid-connect'
 dotenv.config({ debug: true })
 
 const app = express()
@@ -20,14 +21,10 @@ app.use(auth(config))
 
 //Routes
 app.use(membershipRoutes)
+app.use(authRoutes)
 
 //Middleware
 app.use(loggerMiddleware)
-
-app.use('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged' : 'Not Authenticated')
-  res.send('<h1>hello bruh<h1>')
-})
 
 const PORT = process.env.PORT || 3001
 
