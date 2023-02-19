@@ -21,6 +21,7 @@ export function signUp(req: Request, res: Response, next: NextFunction) {
       if (err) {
         return next(err)
       }
+      console.log(`Results found: ${result.rows.length}`)
       res.send(result.rows[0])
     })
   } catch (e) {
@@ -39,6 +40,7 @@ export function findUserById(req: Request, res: Response, next: NextFunction) {
       if (err) {
         return next(err)
       }
+      console.log(`Results found: ${result.rows.length}`)
       res.send(result.rows[0])
     })
   } catch (e) {
@@ -55,6 +57,7 @@ export function findAllUsers(req: Request, res: Response, next: NextFunction) {
       if (err) {
         return next(err)
       }
+      console.log(`Results found: ${result.rows.length}`)
       res.send(result.rows)
     })
   } catch (e) {
