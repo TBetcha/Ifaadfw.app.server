@@ -27,9 +27,4 @@ module.exports = {
     })
   },
   //test
-  //test 2
-  //test 3
-  //test 4
-  //tests 5
-  // test 6
 }
