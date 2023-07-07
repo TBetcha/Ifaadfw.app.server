@@ -29,10 +29,4 @@ module.exports = {
   //test
   //test 2
   //test 3
-<<<<<<< HEAD
-  //test 4
-  //test 5
-  //test 6
-=======
->>>>>>> parent of 3ad533a (test again again again again)
 }
